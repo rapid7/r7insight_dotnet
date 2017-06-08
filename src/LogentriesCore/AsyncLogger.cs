@@ -56,6 +56,9 @@ namespace LogentriesCore.Net
         // Error message deisplayed when queue overflow occurs. 
         protected const String QueueOverflowMessage = "\n\nLogentries buffer queue overflow. Message dropped.\n\n";
 
+        // Error message displayed when region is not provided.
+        protected const String NoRegionMessage = "\n\nNo region is configured, please make sure one is configured; e.g: 'eu', 'us'.\n\n";
+
         // Newline char to trim from message for formatting. 
         protected static char[] TrimChars = { '\r', '\n' };
 
@@ -123,7 +126,6 @@ namespace LogentriesCore.Net
         private String m_Location = "";
         private bool m_ImmediateFlush = false;
         public bool m_Debug = false;
-        private bool m_UseHttpPut = false;
         private bool m_UseSsl = false;
 
         // Properties for defining location of DataHub instance if one is used.
@@ -135,6 +137,8 @@ namespace LogentriesCore.Net
         private bool m_UseHostName = false; // Defines whether to prefix log message with HostName or not.
         private String m_HostName = ""; // User-defined or auto-defined host name (if not set in config. file)
         private String m_LogID = ""; // User-defined log ID to be prefixed to the log message.
+
+        private String m_Region = ""; // Mandatory region option, e.g: us, eu
 
         // Sets DataHub usage flag.
         public void setIsUsingDataHub(bool useDataHub)
@@ -219,16 +223,6 @@ namespace LogentriesCore.Net
             return m_Debug;
         }
 
-        public void setUseHttpPut(bool useHttpPut)
-        {
-            m_UseHttpPut = useHttpPut;
-        }
-
-        public bool getUseHttpPut()
-        {
-            return m_UseHttpPut;
-        }
-
         public void setUseSsl(bool useSsl)
         {
             m_UseSsl = useSsl;
@@ -269,6 +263,15 @@ namespace LogentriesCore.Net
             return m_LogID;
         }
 
+		public void setRegion(String region)
+		{
+			m_Region = region;
+		}
+
+		public String getRegion()
+		{
+			return m_Region;
+		}
         #endregion
 
         protected readonly BlockingCollection<string> Queue;
@@ -356,7 +359,7 @@ namespace LogentriesCore.Net
 
                     // If m_UseDataHub == true (logs are sent to DataHub instance) then m_Token is not
                     // appended to the message.
-                    string finalLine = ((!m_UseHttpPut && !m_UseDataHub) ? this.m_Token + line : line) + '\n';
+                    string finalLine = (!m_UseDataHub ? this.m_Token + line : line) + '\n';
                     
                     // Add prefixes: LogID and HostName if they are defined.
                     if (!isPrefixEmpty)
@@ -411,16 +414,10 @@ namespace LogentriesCore.Net
                     // Create LeClient instance providing all needed parameters. If DataHub-related properties
                     // have not been overridden by log4net or NLog configurators, then DataHub is not used, 
                     // because m_UseDataHub == false by default.
-                    LeClient = new LeClient(m_UseHttpPut, m_UseSsl, m_UseDataHub, m_DataHubAddr, m_DataHubPort);
+                    LeClient = new LeClient(m_UseSsl, m_UseDataHub, m_DataHubAddr, m_DataHubPort, m_Region);
                 }                    
 
                 LeClient.Connect();
-
-                if (m_UseHttpPut)
-                {
-                    var header = String.Format("PUT /{0}/hosts/{1}/?realtime=1 HTTP/1.1\r\n\r\n", m_AccountKey, m_Location);
-                    LeClient.Write(ASCII.GetBytes(header), 0, header.Length);
-                }
             }
             catch (Exception ex)
             {
@@ -539,40 +536,22 @@ namespace LogentriesCore.Net
          */
         public virtual bool LoadCredentials()
         {
-            if (!m_UseHttpPut)
+            if (String.IsNullOrEmpty(m_Region))
             {
-                if (GetIsValidGuid(m_Token))
-                    return true;
-
-                var configToken = retrieveSetting(LegacyConfigTokenName) ?? retrieveSetting(ConfigTokenName);
-
-                if (!String.IsNullOrEmpty(configToken) && GetIsValidGuid(configToken))
-                {
-                    m_Token = configToken;
-                    return true;
-                }
-                WriteDebugMessages(InvalidTokenMessage);
+                WriteDebugMessages(NoRegionMessage);
                 return false;
             }
-
-            if (m_AccountKey != "" && GetIsValidGuid(m_AccountKey) && m_Location != "")
+            if (GetIsValidGuid(m_Token))
                 return true;
 
-            var configAccountKey = retrieveSetting(LegacyConfigAccountKeyName) ?? retrieveSetting(ConfigAccountKeyName);
+            var configToken = retrieveSetting(LegacyConfigTokenName) ?? retrieveSetting(ConfigTokenName);
 
-            if (!String.IsNullOrEmpty(configAccountKey) && GetIsValidGuid(configAccountKey))
+            if (!String.IsNullOrEmpty(configToken) && GetIsValidGuid(configToken))
             {
-                m_AccountKey = configAccountKey;
-
-                var configLocation = retrieveSetting(LegacyConfigLocationName) ?? retrieveSetting(ConfigLocationName);
-
-                if (!String.IsNullOrEmpty(configLocation))
-                {
-                    m_Location = configLocation;
-                    return true;
-                }
+                m_Token = configToken;
+                return true;
             }
-            WriteDebugMessages(InvalidHttpPutCredentialsMessage);
+            WriteDebugMessages(InvalidTokenMessage);
             return false;
         }
 
