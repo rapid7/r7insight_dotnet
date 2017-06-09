@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogentriesCore", "LogentriesCore\LogentriesCore.csproj", "{90D6E9FC-7B88-4E1B-B018-8FA742274558}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightOpsCore", "LogentriesCore\InsightOpsCore.csproj", "{90D6E9FC-7B88-4E1B-B018-8FA742274558}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogentriesLog4net", "LogentriesLog4net\LogentriesLog4net.csproj", "{CF8A9166-3B7D-4D4C-82CB-6C98C68DB110}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightOpsLog4net", "LogentriesLog4net\InsightOpsLog4net.csproj", "{CF8A9166-3B7D-4D4C-82CB-6C98C68DB110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogentriesNLog", "LogentriesNLog\LogentriesNLog.csproj", "{9DC31DE3-79FF-47A8-96B4-6BA18F6BB1CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightOpsNLog", "LogentriesNLog\InsightOpsNLog.csproj", "{9DC31DE3-79FF-47A8-96B4-6BA18F6BB1CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

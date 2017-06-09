@@ -8,8 +8,8 @@
     <ProjectGuid>{9DC31DE3-79FF-47A8-96B4-6BA18F6BB1CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LogentriesNLog</RootNamespace>
-    <AssemblyName>LogentriesNLog</AssemblyName>
+    <RootNamespace>InsightOpsNLog</RootNamespace>
+    <AssemblyName>InsightOpsNLog</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,13 +43,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogentriesTarget.cs" />
+    <Compile Include="InsightOpsTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LogentriesCore\LogentriesCore.csproj">
+    <ProjectReference Include="..\InsightOpsCore\InsightOpsCore.csproj">
       <Project>{90D6E9FC-7B88-4E1B-B018-8FA742274558}</Project>
-      <Name>LogentriesCore</Name>
+      <Name>InsightOpsCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

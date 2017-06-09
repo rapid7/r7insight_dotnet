@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
     using Microsoft.Azure;
 #endif
 
-namespace LogentriesCore.Net
+namespace InsightOpsCore.Net
 {
     using System.Security;
     using System.Collections.Concurrent;
@@ -278,7 +278,7 @@ namespace LogentriesCore.Net
         protected readonly Thread WorkerThread;
         protected readonly Random Random = new Random();
 
-        private LeClient LeClient = null;
+        private InsightOpsClient InsightOpsClient = null;
         protected bool IsRunning = false;
 
         #region Protected methods
@@ -377,12 +377,12 @@ namespace LogentriesCore.Net
                             //removed iff loop and added debug message
                             // Le.Client writes data
                             WriteDebugMessages("Write data");
-                            this.LeClient.Write(data, 0, data.Length);
+                            this.InsightOpsClient.Write(data, 0, data.Length);
 
                             WriteDebugMessages("Write complete, flush");
 
                             // if (m_ImmediateFlush) was removed, always flushed now.
-                                this.LeClient.Flush();
+                                this.InsightOpsClient.Flush();
 
                             WriteDebugMessages("Flush complete");
 
@@ -409,15 +409,15 @@ namespace LogentriesCore.Net
         {
             try
             {
-                if (LeClient == null)
+                if (InsightOpsClient == null)
                 {
                     // Create LeClient instance providing all needed parameters. If DataHub-related properties
                     // have not been overridden by log4net or NLog configurators, then DataHub is not used, 
                     // because m_UseDataHub == false by default.
-                    LeClient = new LeClient(m_UseSsl, m_UseDataHub, m_DataHubAddr, m_DataHubPort, m_Region);
+                    InsightOpsClient = new InsightOpsClient(m_UseSsl, m_UseDataHub, m_DataHubAddr, m_DataHubPort, m_Region);
                 }                    
 
-                LeClient.Connect();
+                InsightOpsClient.Connect();
             }
             catch (Exception ex)
             {
@@ -466,8 +466,8 @@ namespace LogentriesCore.Net
 
         protected virtual void CloseConnection()
         {
-            if (LeClient != null)
-                LeClient.Close();
+            if (InsightOpsClient != null)
+                InsightOpsClient.Close();
         }
 
         public static bool IsNullOrWhiteSpace(String value)

@@ -8,8 +8,8 @@
     <ProjectGuid>{CF8A9166-3B7D-4D4C-82CB-6C98C68DB110}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LogentriesLog4net</RootNamespace>
-    <AssemblyName>LogentriesLog4net</AssemblyName>
+    <RootNamespace>InsightOpsLog4net</RootNamespace>
+    <AssemblyName>InsightOpsLog4net</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,13 +43,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogentriesAppender.cs" />
+    <Compile Include="InsightOpsAppender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LogentriesCore\LogentriesCore.csproj">
+    <ProjectReference Include="..\InsightOpsCore\InsightOpsCore.csproj">
       <Project>{90D6E9FC-7B88-4E1B-B018-8FA742274558}</Project>
-      <Name>LogentriesCore</Name>
+      <Name>InsightOpsCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

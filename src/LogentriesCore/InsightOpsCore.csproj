@@ -8,8 +8,8 @@
     <ProjectGuid>{90D6E9FC-7B88-4E1B-B018-8FA742274558}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LogentriesCore</RootNamespace>
-    <AssemblyName>LogentriesCore</AssemblyName>
+    <RootNamespace>InsightOpsCore</RootNamespace>
+    <AssemblyName>InsightOpsCore</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncLogger.cs" />
-    <Compile Include="LeClient.cs" />
+    <Compile Include="InsightOpsClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
