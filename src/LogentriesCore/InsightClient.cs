@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace InsightOpsCore.Net
+namespace InsightCore.Net
 {
-    class InsightOpsClient
+    class InsightClient
     {
         // Logentries API server address. 
         protected const String LeDataUrl = "{}.data.logs.insight.rapid7.com";
@@ -23,7 +23,7 @@ namespace InsightOpsCore.Net
         // Creates LeClient instance. If do not define useServerUrl and/or useOverrideProt during call
         // LeClient will be configured to work with api.logentries.com server; otherwise - with
         // defined server on defined port.
-        public InsightOpsClient(bool useSsl, bool useDataHub, String serverAddr, int port, String region)
+        public InsightClient(bool useSsl, bool useDataHub, String serverAddr, int port, String region)
         {
            
             // Override port number and server address to send logs to DataHub instance.

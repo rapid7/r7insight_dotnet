@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
     using Microsoft.Azure;
 #endif
 
-namespace InsightOpsCore.Net
+namespace InsightCore.Net
 {
     using System.Security;
     using System.Collections.Concurrent;
@@ -278,7 +278,7 @@ namespace InsightOpsCore.Net
         protected readonly Thread WorkerThread;
         protected readonly Random Random = new Random();
 
-        private InsightOpsClient InsightOpsClient = null;
+        private InsightClient InsightClient = null;
         protected bool IsRunning = false;
 
         #region Protected methods
@@ -377,12 +377,12 @@ namespace InsightOpsCore.Net
                             //removed iff loop and added debug message
                             // Le.Client writes data
                             WriteDebugMessages("Write data");
-                            this.InsightOpsClient.Write(data, 0, data.Length);
+                            this.InsightClient.Write(data, 0, data.Length);
 
                             WriteDebugMessages("Write complete, flush");
 
                             // if (m_ImmediateFlush) was removed, always flushed now.
-                                this.InsightOpsClient.Flush();
+                                this.InsightClient.Flush();
 
                             WriteDebugMessages("Flush complete");
 
@@ -409,15 +409,15 @@ namespace InsightOpsCore.Net
         {
             try
             {
-                if (InsightOpsClient == null)
+                if (InsightClient == null)
                 {
                     // Create LeClient instance providing all needed parameters. If DataHub-related properties
                     // have not been overridden by log4net or NLog configurators, then DataHub is not used, 
                     // because m_UseDataHub == false by default.
-                    InsightOpsClient = new InsightOpsClient(m_UseSsl, m_UseDataHub, m_DataHubAddr, m_DataHubPort, m_Region);
+                    InsightClient = new InsightClient(m_UseSsl, m_UseDataHub, m_DataHubAddr, m_DataHubPort, m_Region);
                 }                    
 
-                InsightOpsClient.Connect();
+                InsightClient.Connect();
             }
             catch (Exception ex)
             {
@@ -466,8 +466,8 @@ namespace InsightOpsCore.Net
 
         protected virtual void CloseConnection()
         {
-            if (InsightOpsClient != null)
-                InsightOpsClient.Close();
+            if (InsightClient != null)
+                InsightClient.Close();
         }
 
         public static bool IsNullOrWhiteSpace(String value)

@@ -8,8 +8,8 @@
     <ProjectGuid>{9DC31DE3-79FF-47A8-96B4-6BA18F6BB1CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InsightOpsNLog</RootNamespace>
-    <AssemblyName>InsightOpsNLog</AssemblyName>
+    <RootNamespace>InsightNLog</RootNamespace>
+    <AssemblyName>InsightNLog</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,13 +43,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InsightOpsTarget.cs" />
+    <Compile Include="InsightTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InsightOpsCore\InsightOpsCore.csproj">
+    <ProjectReference Include="..\InsightCore\InsightCore.csproj">
       <Project>{90D6E9FC-7B88-4E1B-B018-8FA742274558}</Project>
-      <Name>InsightOpsCore</Name>
+      <Name>InsightCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +59,7 @@
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
 COPY "$(TargetPath)" "%25NUGET_PROJECTS%25$(ProjectName)\2.3.0\lib\net40\" /Y
-nuget pack %25NUGET_PROJECTS%25$(ProjectName)\2.3.0\logentries.nlog.nuspec /o %25NUGET_PROJECTS%25$(ProjectName)\2.3.0\
+nuget pack %25NUGET_PROJECTS%25$(ProjectName)\2.3.0\insight.nlog.nuspec /o %25NUGET_PROJECTS%25$(ProjectName)\2.3.0\
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

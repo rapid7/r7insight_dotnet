@@ -8,8 +8,8 @@
     <ProjectGuid>{CF8A9166-3B7D-4D4C-82CB-6C98C68DB110}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InsightOpsLog4net</RootNamespace>
-    <AssemblyName>InsightOpsLog4net</AssemblyName>
+    <RootNamespace>InsightLog4net</RootNamespace>
+    <AssemblyName>InsightLog4net</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,13 +43,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InsightOpsAppender.cs" />
+    <Compile Include="InsightAppender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InsightOpsCore\InsightOpsCore.csproj">
+    <ProjectReference Include="..\InsightCore\InsightCore.csproj">
       <Project>{90D6E9FC-7B88-4E1B-B018-8FA742274558}</Project>
-      <Name>InsightOpsCore</Name>
+      <Name>InsightCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

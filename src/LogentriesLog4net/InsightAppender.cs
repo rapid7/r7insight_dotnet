@@ -5,17 +5,17 @@ using System.Text;
 using log4net.Appender;
 using log4net.Core;
 
-using InsightOpsCore.Net;
+using InsightCore.Net;
 
 namespace log4net.Appender
 {
-    public class InsightOpsAppender : AppenderSkeleton
+    public class InsightAppender : AppenderSkeleton
     {
-        private AsyncLogger insightOpsAsync;
+        private AsyncLogger insightAsync;
 
-        public InsightOpsAppender()
+        public InsightAppender()
         {
-            insightOpsAsync = new AsyncLogger();
+            insightAsync = new AsyncLogger();
         }
 
         #region attributeMethods
@@ -25,11 +25,11 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getToken();
+                return insightAsync.getToken();
             }
             set
             {
-                insightOpsAsync.setToken(value);
+                insightAsync.setToken(value);
             }
         }
 
@@ -38,11 +38,11 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getAccountKey();
+                return insightAsync.getAccountKey();
             }
             set
             {
-                insightOpsAsync.setAccountKey(value);
+                insightAsync.setAccountKey(value);
             }
         }
 
@@ -51,11 +51,11 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getLocation();
+                return insightAsync.getLocation();
             }
             set
             {
-                insightOpsAsync.setLocation(value);
+                insightAsync.setLocation(value);
             }
         }
 
@@ -64,11 +64,11 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getImmediateFlush();
+                return insightAsync.getImmediateFlush();
             }
             set
             {
-                insightOpsAsync.setImmediateFlush(value);
+                insightAsync.setImmediateFlush(value);
             }
         }
 
@@ -77,11 +77,11 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getDebug();
+                return insightAsync.getDebug();
             }
             set
             {
-                insightOpsAsync.setDebug(value);
+                insightAsync.setDebug(value);
             }
         }
 
@@ -90,11 +90,11 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getUseSsl();
+                return insightAsync.getUseSsl();
             }
             set
             {
-                insightOpsAsync.setUseSsl(value);
+                insightAsync.setUseSsl(value);
             }
         }
 
@@ -103,11 +103,11 @@ namespace log4net.Appender
         {
             get 
             { 
-                return insightOpsAsync.getIsUsingDataHab(); 
+                return insightAsync.getIsUsingDataHab(); 
             }
             set 
             { 
-                insightOpsAsync.setIsUsingDataHub(value); 
+                insightAsync.setIsUsingDataHub(value); 
             }
         }
 
@@ -116,11 +116,11 @@ namespace log4net.Appender
         {
             get 
             { 
-                return insightOpsAsync.getDataHubAddr(); 
+                return insightAsync.getDataHubAddr(); 
             }
             set 
             { 
-                insightOpsAsync.setDataHubAddr(value); 
+                insightAsync.setDataHubAddr(value); 
             }
         }
 
@@ -129,11 +129,11 @@ namespace log4net.Appender
         {
             get 
             { 
-                return insightOpsAsync.getDataHubPort(); 
+                return insightAsync.getDataHubPort(); 
             }
             set 
             { 
-                insightOpsAsync.setDataHubPort(value); 
+                insightAsync.setDataHubPort(value); 
             }
         }
 
@@ -142,11 +142,11 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getUseHostName();
+                return insightAsync.getUseHostName();
             }
             set
             {
-                insightOpsAsync.setUseHostName(value);
+                insightAsync.setUseHostName(value);
             }
         }
 
@@ -155,11 +155,11 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getHostName();
+                return insightAsync.getHostName();
             }
             set
             {
-                insightOpsAsync.setHostName(value);
+                insightAsync.setHostName(value);
             }
         }
 
@@ -168,11 +168,11 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getLogID();
+                return insightAsync.getLogID();
             }
             set
             {
-                insightOpsAsync.setLogID(value);
+                insightAsync.setLogID(value);
             }
         }
 
@@ -182,33 +182,33 @@ namespace log4net.Appender
         {
             get
             {
-                return insightOpsAsync.getUseSsl();
+                return insightAsync.getUseSsl();
             }
             set
             {
-                insightOpsAsync.setUseSsl(value);
+                insightAsync.setUseSsl(value);
             }
         }
 
-		/* User-defined region */
-		public String Region
-		{
-			get
-			{
-                return insightOpsAsync.getRegion();
-			}
-			set
-			{
-                insightOpsAsync.setRegion(value);
-			}
-		}
+        /* User-defined region */
+        public String Region
+        {
+            get
+            {
+                return insightAsync.getRegion();
+            }
+            set
+            {
+                insightAsync.setRegion(value);
+            }
+        }
 
         #endregion
 
         protected override void Append(LoggingEvent loggingEvent)
         {
             var renderedEvent = RenderLoggingEvent(loggingEvent);
-            insightOpsAsync.AddLine(renderedEvent);
+            insightAsync.AddLine(renderedEvent);
         }
 
         protected override void Append(LoggingEvent[] loggingEvents)
@@ -229,7 +229,7 @@ namespace log4net.Appender
 
         protected override void OnClose()
         {
-            insightOpsAsync.interruptWorker();
+            insightAsync.interruptWorker();
         }
     }
 }

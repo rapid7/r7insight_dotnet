@@ -8,104 +8,104 @@ using NLog.Config;
 using NLog.Layouts;
 using NLog.Targets;
 
-using InsightOpsCore.Net;
+using InsightCore.Net;
 
 namespace NLog.Targets
 {
-    [Target("InsightOps")]
-    public sealed class InsightOpsTarget : TargetWithLayout
+    [Target("Insight")]
+    public sealed class InsightTarget : TargetWithLayout
     {
-        private AsyncLogger insightOpsAsync;
+        private AsyncLogger insightAsync;
 
-        public InsightOpsTarget()
+        public InsightTarget()
         {
-            insightOpsAsync = new AsyncLogger();
+            insightAsync = new AsyncLogger();
         }
 
         
         /** Debug flag. */
         public bool Debug 
         {
-            get { return insightOpsAsync.getDebug(); }
-            set { insightOpsAsync.setDebug(value); } 
+            get { return insightAsync.getDebug(); }
+            set { insightAsync.setDebug(value); } 
         }
 
         /** Is using DataHub parameter flag. - ste to true if it is needed to send messages to DataHub instance. */
         public bool IsUsingDataHub
         {
-            get { return insightOpsAsync.getIsUsingDataHab(); }
-            set { insightOpsAsync.setIsUsingDataHub(value); }
+            get { return insightAsync.getIsUsingDataHab(); }
+            set { insightAsync.setIsUsingDataHub(value); }
         }
 
         /** DataHub server address */
         public String DataHubAddr
         {
-            get { return insightOpsAsync.getDataHubAddr(); }
-            set { insightOpsAsync.setDataHubAddr(value); }
+            get { return insightAsync.getDataHubAddr(); }
+            set { insightAsync.setDataHubAddr(value); }
         }
 
         /** DataHub server port */
         public int DataHubPort
         {
-            get { return insightOpsAsync.getDataHubPort(); }
-            set { insightOpsAsync.setDataHubPort(value); }
+            get { return insightAsync.getDataHubPort(); }
+            set { insightAsync.setDataHubPort(value); }
         }
 
         /** Option to set Token programmatically or in Appender Definition */
         public string Token
         {
-            get { return insightOpsAsync.getToken(); }
-            set { insightOpsAsync.setToken(value); }
+            get { return insightAsync.getToken(); }
+            set { insightAsync.setToken(value); }
         }
 
         /** SSL/TLS parameter flag */
         public bool Ssl
         {
-            get { return insightOpsAsync.getUseSsl(); }
-            set { insightOpsAsync.setUseSsl(value); }
+            get { return insightAsync.getUseSsl(); }
+            set { insightAsync.setUseSsl(value); }
         }
 
         /** ACCOUNT_KEY parameter for HTTP PUT logging */
         public String Key
         {
-            get { return insightOpsAsync.getAccountKey(); }
-            set { insightOpsAsync.setAccountKey(value); }
+            get { return insightAsync.getAccountKey(); }
+            set { insightAsync.setAccountKey(value); }
         }
 
         /** LOCATION parameter for HTTP PUT logging */
         public String Location
         {
-            get { return insightOpsAsync.getLocation(); }
-            set { insightOpsAsync.setLocation(value); }
+            get { return insightAsync.getLocation(); }
+            set { insightAsync.setLocation(value); }
         }
 
         /* LogHostname - switch that defines whether add host name to the log message */
         public bool LogHostname
         {
-            get { return insightOpsAsync.getUseHostName(); }
-            set { insightOpsAsync.setUseHostName(value); }
+            get { return insightAsync.getUseHostName(); }
+            set { insightAsync.setUseHostName(value); }
         }
 
         /* HostName - user-defined host name. If empty the library will try to obtain it automatically */
         public String HostName
         {
-            get { return insightOpsAsync.getHostName(); }
-            set { insightOpsAsync.setHostName(value); }
+            get { return insightAsync.getHostName(); }
+            set { insightAsync.setHostName(value); }
         }
 
         /* User-defined log message ID */
         public String LogID
         {
-            get { return insightOpsAsync.getLogID(); }
-            set { insightOpsAsync.setLogID(value); }
+            get { return insightAsync.getLogID(); }
+            set { insightAsync.setLogID(value); }
         }
 
-		/* User-defined log message ID */
-		public String Region
-		{
-            get { return insightOpsAsync.getRegion(); }
-			set { insightOpsAsync.setRegion(value); }
-		}
+        /* User-defined log message ID */
+        public String Region
+        {
+            get { return insightAsync.getRegion(); }
+            set { insightAsync.setRegion(value); }
+        }
 
         public bool KeepConnection { get; set; }
 
@@ -114,14 +114,14 @@ namespace NLog.Targets
             //Render message content
             String renderedEvent = this.Layout.Render(logEvent);
 
-            insightOpsAsync.AddLine(renderedEvent);
+            insightAsync.AddLine(renderedEvent);
         }
 
         protected override void CloseTarget()
         {
             base.CloseTarget();
 
-            insightOpsAsync.interruptWorker();
+            insightAsync.interruptWorker();
         }
     }
 }
