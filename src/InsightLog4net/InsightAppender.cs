@@ -5,17 +5,17 @@ using System.Text;
 using log4net.Appender;
 using log4net.Core;
 
-using LogentriesCore.Net;
+using InsightCore.Net;
 
 namespace log4net.Appender
 {
-    public class LogentriesAppender : AppenderSkeleton
+    public class InsightAppender : AppenderSkeleton
     {
-        private AsyncLogger logentriesAsync;
+        private AsyncLogger insightAsync;
 
-        public LogentriesAppender()
+        public InsightAppender()
         {
-            logentriesAsync = new AsyncLogger();
+            insightAsync = new AsyncLogger();
         }
 
         #region attributeMethods
@@ -25,11 +25,11 @@ namespace log4net.Appender
         {
             get
             {
-                return logentriesAsync.getToken();
+                return insightAsync.getToken();
             }
             set
             {
-                logentriesAsync.setToken(value);
+                insightAsync.setToken(value);
             }
         }
 
@@ -38,11 +38,11 @@ namespace log4net.Appender
         {
             get
             {
-                return logentriesAsync.getAccountKey();
+                return insightAsync.getAccountKey();
             }
             set
             {
-                logentriesAsync.setAccountKey(value);
+                insightAsync.setAccountKey(value);
             }
         }
 
@@ -51,11 +51,11 @@ namespace log4net.Appender
         {
             get
             {
-                return logentriesAsync.getLocation();
+                return insightAsync.getLocation();
             }
             set
             {
-                logentriesAsync.setLocation(value);
+                insightAsync.setLocation(value);
             }
         }
 
@@ -64,11 +64,11 @@ namespace log4net.Appender
         {
             get
             {
-                return logentriesAsync.getImmediateFlush();
+                return insightAsync.getImmediateFlush();
             }
             set
             {
-                logentriesAsync.setImmediateFlush(value);
+                insightAsync.setImmediateFlush(value);
             }
         }
 
@@ -77,53 +77,24 @@ namespace log4net.Appender
         {
             get
             {
-                return logentriesAsync.getDebug();
+                return insightAsync.getDebug();
             }
             set
             {
-                logentriesAsync.setDebug(value);
+                insightAsync.setDebug(value);
             }
         }
-
-
-        /* Set to true to use HTTP PUT logging. */
-        public bool UseHttpPut
-        {
-            get
-            {
-                return logentriesAsync.getUseHttpPut();
-            }
-            set
-            {
-                logentriesAsync.setUseHttpPut(value);
-            }
-        }
-
-        /* This property exists for backward compatibility with older configuration XML. */
-        [Obsolete("Use the UseHttpPut property instead.")]
-        public bool HttpPut
-        {
-            get
-            {
-                return logentriesAsync.getUseHttpPut();
-            }
-            set
-            {
-                logentriesAsync.setUseHttpPut(value);
-            }
-        }
-
 
         /* Set to true to use SSL with HTTP PUT logging. */
         public bool UseSsl
         {
             get
             {
-                return logentriesAsync.getUseSsl();
+                return insightAsync.getUseSsl();
             }
             set
             {
-                logentriesAsync.setUseSsl(value);
+                insightAsync.setUseSsl(value);
             }
         }
 
@@ -132,11 +103,11 @@ namespace log4net.Appender
         {
             get 
             { 
-                return logentriesAsync.getIsUsingDataHab(); 
+                return insightAsync.getIsUsingDataHab(); 
             }
             set 
             { 
-                logentriesAsync.setIsUsingDataHub(value); 
+                insightAsync.setIsUsingDataHub(value); 
             }
         }
 
@@ -145,11 +116,11 @@ namespace log4net.Appender
         {
             get 
             { 
-                return logentriesAsync.getDataHubAddr(); 
+                return insightAsync.getDataHubAddr(); 
             }
             set 
             { 
-                logentriesAsync.setDataHubAddr(value); 
+                insightAsync.setDataHubAddr(value); 
             }
         }
 
@@ -158,11 +129,11 @@ namespace log4net.Appender
         {
             get 
             { 
-                return logentriesAsync.getDataHubPort(); 
+                return insightAsync.getDataHubPort(); 
             }
             set 
             { 
-                logentriesAsync.setDataHubPort(value); 
+                insightAsync.setDataHubPort(value); 
             }
         }
 
@@ -171,11 +142,11 @@ namespace log4net.Appender
         {
             get
             {
-                return logentriesAsync.getUseHostName();
+                return insightAsync.getUseHostName();
             }
             set
             {
-                logentriesAsync.setUseHostName(value);
+                insightAsync.setUseHostName(value);
             }
         }
 
@@ -184,11 +155,11 @@ namespace log4net.Appender
         {
             get
             {
-                return logentriesAsync.getHostName();
+                return insightAsync.getHostName();
             }
             set
             {
-                logentriesAsync.setHostName(value);
+                insightAsync.setHostName(value);
             }
         }
 
@@ -197,11 +168,11 @@ namespace log4net.Appender
         {
             get
             {
-                return logentriesAsync.getLogID();
+                return insightAsync.getLogID();
             }
             set
             {
-                logentriesAsync.setLogID(value);
+                insightAsync.setLogID(value);
             }
         }
 
@@ -211,11 +182,24 @@ namespace log4net.Appender
         {
             get
             {
-                return logentriesAsync.getUseSsl();
+                return insightAsync.getUseSsl();
             }
             set
             {
-                logentriesAsync.setUseSsl(value);
+                insightAsync.setUseSsl(value);
+            }
+        }
+
+        /* User-defined region */
+        public String Region
+        {
+            get
+            {
+                return insightAsync.getRegion();
+            }
+            set
+            {
+                insightAsync.setRegion(value);
             }
         }
 
@@ -224,7 +208,7 @@ namespace log4net.Appender
         protected override void Append(LoggingEvent loggingEvent)
         {
             var renderedEvent = RenderLoggingEvent(loggingEvent);
-            logentriesAsync.AddLine(renderedEvent);
+            insightAsync.AddLine(renderedEvent);
         }
 
         protected override void Append(LoggingEvent[] loggingEvents)
@@ -245,7 +229,7 @@ namespace log4net.Appender
 
         protected override void OnClose()
         {
-            logentriesAsync.interruptWorker();
+            insightAsync.interruptWorker();
         }
     }
 }

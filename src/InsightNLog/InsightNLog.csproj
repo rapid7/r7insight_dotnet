@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CF8A9166-3B7D-4D4C-82CB-6C98C68DB110}</ProjectGuid>
+    <ProjectGuid>{9DC31DE3-79FF-47A8-96B4-6BA18F6BB1CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LogentriesLog4net</RootNamespace>
-    <AssemblyName>LogentriesLog4net</AssemblyName>
+    <RootNamespace>InsightNLog</RootNamespace>
+    <AssemblyName>InsightNLog</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,15 +38,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.4.10\lib\net40\NLog.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogentriesAppender.cs" />
+    <Compile Include="InsightTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LogentriesCore\LogentriesCore.csproj">
+    <ProjectReference Include="..\InsightCore\InsightCore.csproj">
       <Project>{90D6E9FC-7B88-4E1B-B018-8FA742274558}</Project>
-      <Name>LogentriesCore</Name>
+      <Name>InsightCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -59,8 +58,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
-COPY "$(TargetPath)" "%25NUGET_PROJECTS%25$(ProjectName)\2.5.0\lib\net40\" /Y
-nuget pack %25NUGET_PROJECTS%25$(ProjectName)\2.5.0\logentries.log4net.nuspec /o %25NUGET_PROJECTS%25$(ProjectName)\2.5.0\
+COPY "$(TargetPath)" "%25NUGET_PROJECTS%25$(ProjectName)\2.3.0\lib\net40\" /Y
+nuget pack %25NUGET_PROJECTS%25$(ProjectName)\2.3.0\insight.nlog.nuspec /o %25NUGET_PROJECTS%25$(ProjectName)\2.3.0\
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
