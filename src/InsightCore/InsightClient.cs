@@ -12,7 +12,7 @@ namespace InsightCore.Net
     class InsightClient
     {
         // Logentries API server address. 
-        protected const String LeDataUrl = "{}.data.logs.insight.rapid7.com";
+        protected const String LeDataUrl = "{0}.data.logs.insight.rapid7.com";
 
         // Port number for logging on Logentries DATA server. 
         protected const int LeUnsecurePort = 80;
