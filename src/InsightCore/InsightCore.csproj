@@ -55,7 +55,7 @@
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
 COPY "$(TargetPath)" "%25NUGET_PROJECTS%25$(ProjectName)\2.6.0\lib\net40\" /Y
-nuget pack %25NUGET_PROJECTS%25$(ProjectName)\2.6.0\logentries.core.nuspec /o %25NUGET_PROJECTS%25$(ProjectName)\2.6.0\
+nuget pack %25NUGET_PROJECTS%25$(ProjectName)\2.6.0\insight.core.nuspec /o %25NUGET_PROJECTS%25$(ProjectName)\2.6.0\
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
