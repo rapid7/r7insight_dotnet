@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("InsightNLog")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("R7InsightNLog")]
+[assembly: AssemblyDescription("Rapid7 Insight logging support nlog library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("InsightNLog")]
+[assembly: AssemblyCompany("Rapid7")]
+[assembly: AssemblyProduct("R7InsightNLog")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
