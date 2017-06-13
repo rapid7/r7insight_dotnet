@@ -8,8 +8,8 @@
     <ProjectGuid>{9DC31DE3-79FF-47A8-96B4-6BA18F6BB1CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InsightNLog</RootNamespace>
-    <AssemblyName>InsightNLog</AssemblyName>
+    <RootNamespace>R7Insight.NLog</RootNamespace>
+    <AssemblyName>R7Insight.NLog</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -23,7 +23,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>
+    </DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -47,9 +48,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InsightCore\InsightCore.csproj">
+    <ProjectReference Include="..\R7InsightCore\R7Insight.Core.csproj">
       <Project>{90D6E9FC-7B88-4E1B-B018-8FA742274558}</Project>
-      <Name>InsightCore</Name>
+      <Name>R7Insight.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

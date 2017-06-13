@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CF8A9166-3B7D-4D4C-82CB-6C98C68DB110}</ProjectGuid>
+    <ProjectGuid>{90D6E9FC-7B88-4E1B-B018-8FA742274558}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InsightLog4net</RootNamespace>
-    <AssemblyName>InsightLog4net</AssemblyName>
+    <RootNamespace>R7Insight.Core</RootNamespace>
+    <AssemblyName>R7Insight.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,25 +32,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.Configuration">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InsightAppender.cs" />
+    <Compile Include="AsyncLogger.cs" />
+    <Compile Include="InsightClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\InsightCore\InsightCore.csproj">
-      <Project>{90D6E9FC-7B88-4E1B-B018-8FA742274558}</Project>
-      <Name>InsightCore</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -58,8 +54,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
-COPY "$(TargetPath)" "%25NUGET_PROJECTS%25$(ProjectName)\2.5.0\lib\net40\" /Y
-nuget pack %25NUGET_PROJECTS%25$(ProjectName)\2.5.0\logentries.log4net.nuspec /o %25NUGET_PROJECTS%25$(ProjectName)\2.5.0\
+COPY "$(TargetPath)" "%25NUGET_PROJECTS%25$(ProjectName)\2.6.0\lib\net40\" /Y
+nuget pack %25NUGET_PROJECTS%25$(ProjectName)\2.6.0\r7insight.core.nuspec /o %25NUGET_PROJECTS%25$(ProjectName)\2.6.0\
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

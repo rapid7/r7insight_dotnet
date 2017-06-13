@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightCore", "InsightCore\InsightCore.csproj", "{90D6E9FC-7B88-4E1B-B018-8FA742274558}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R7Insight.Core", "R7InsightCore\R7Insight.Core.csproj", "{90D6E9FC-7B88-4E1B-B018-8FA742274558}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightLog4net", "InsightLog4net\InsightLog4net.csproj", "{CF8A9166-3B7D-4D4C-82CB-6C98C68DB110}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R7Insight.Log4net", "R7InsightLog4net\R7Insight.Log4net.csproj", "{CF8A9166-3B7D-4D4C-82CB-6C98C68DB110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightNLog", "InsightNLog\InsightNLog.csproj", "{9DC31DE3-79FF-47A8-96B4-6BA18F6BB1CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R7Insight.NLog", "R7InsightNLog\R7Insight.NLog.csproj", "{9DC31DE3-79FF-47A8-96B4-6BA18F6BB1CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
