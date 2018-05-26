@@ -9,18 +9,35 @@ using InsightCore.Net;
 
 namespace log4net.Appender
 {
-    public class InsightAppender : AppenderSkeleton
+    public class InsightAppender : AppenderSkeleton, IAsyncLoggerConfig
     {
-        private AsyncLogger insightAsync;
+        class Log4netAsyncLogger : AsyncLogger
+        {
+            protected override void WriteDebugMessages(string message, Exception ex)
+            {
+                base.WriteDebugMessages(message, ex);
+                log4net.Util.LogLog.Warn(GetType(), message, ex);
+            }
+
+            public override bool LoadCredentials()
+            {
+                bool success = base.LoadCredentials();
+                if (!success)
+                {
+                    log4net.Util.LogLog.Warn(GetType(), "Failed to load credentials for LogEntries (GET), please check LOGENTRIES_TOKEN configuration");
+                }
+                return success;
+            }
+        }
+
+        private Log4netAsyncLogger insightAsync;
 
         public InsightAppender()
         {
-            insightAsync = new AsyncLogger();
+            insightAsync = new Log4netAsyncLogger();
         }
 
-        #region attributeMethods
-
-        /* Option to set LOGENTRIES_TOKEN programmatically or in appender definition. */
+        /// <inheritdoc />
         public string Token
         {
             get
@@ -33,46 +50,7 @@ namespace log4net.Appender
             }
         }
 
-        /* Option to set LOGENTRIES_ACCOUNT_KEY programmatically or in appender definition. */
-        public String AccountKey
-        {
-            get
-            {
-                return insightAsync.getAccountKey();
-            }
-            set
-            {
-                insightAsync.setAccountKey(value);
-            }
-        }
-
-        /* Option to set LOGENTRIES_LOCATION programmatically or in appender definition. */
-        public String Location
-        {
-            get
-            {
-                return insightAsync.getLocation();
-            }
-            set
-            {
-                insightAsync.setLocation(value);
-            }
-        }
-
-        /* Set to true to always flush the TCP stream after every written entry. */
-        public bool ImmediateFlush
-        {
-            get
-            {
-                return insightAsync.getImmediateFlush();
-            }
-            set
-            {
-                insightAsync.setImmediateFlush(value);
-            }
-        }
-
-        /* Debug flag. */
+        /// <inheritdoc />
         public bool Debug
         {
             get
@@ -85,7 +63,7 @@ namespace log4net.Appender
             }
         }
 
-        /* Set to true to use SSL with HTTP PUT logging. */
+        /// <inheritdoc />
         public bool UseSsl
         {
             get
@@ -98,46 +76,46 @@ namespace log4net.Appender
             }
         }
 
-        /* Is using DataHub parameter flag. - set to true to use DataHub server */
+        /// <inheritdoc />
         public bool IsUsingDataHub
         {
-            get 
-            { 
-                return insightAsync.getIsUsingDataHab(); 
+            get
+            {
+                return insightAsync.getIsUsingDataHab();
             }
-            set 
-            { 
-                insightAsync.setIsUsingDataHub(value); 
+            set
+            {
+                insightAsync.setIsUsingDataHub(value);
             }
         }
 
-        /* DataHub server address */
-        public String DataHubAddr
+        /// <inheritdoc />
+        public string DataHubAddress
         {
-            get 
-            { 
-                return insightAsync.getDataHubAddr(); 
+            get
+            {
+                return insightAsync.getDataHubAddr();
             }
-            set 
-            { 
-                insightAsync.setDataHubAddr(value); 
+            set
+            {
+                insightAsync.setDataHubAddr(value);
             }
         }
 
-        /* DataHub server port */
+        /// <inheritdoc />
         public int DataHubPort
         {
-            get 
-            { 
-                return insightAsync.getDataHubPort(); 
+            get
+            {
+                return insightAsync.getDataHubPort();
             }
-            set 
-            { 
-                insightAsync.setDataHubPort(value); 
+            set
+            {
+                insightAsync.setDataHubPort(value);
             }
         }
 
-        /* Switch that defines whether add host name to the log message */
+        /// <inheritdoc />
         public bool LogHostname
         {
             get
@@ -150,7 +128,7 @@ namespace log4net.Appender
             }
         }
 
-        /* User-defined host name. If empty the library will try to obtain it automatically */
+        /// <inheritdoc />
         public String HostName
         {
             get
@@ -163,7 +141,7 @@ namespace log4net.Appender
             }
         }
 
-        /* User-defined log message ID */
+        /// <inheritdoc />
         public String LogID
         {
             get
@@ -176,21 +154,7 @@ namespace log4net.Appender
             }
         }
 
-        /* This property exists for backward compatibility with older configuration XML. */
-        [Obsolete("Use the UseSsl property instead.")]
-        public bool Ssl
-        {
-            get
-            {
-                return insightAsync.getUseSsl();
-            }
-            set
-            {
-                insightAsync.setUseSsl(value);
-            }
-        }
-
-        /* User-defined region */
+        /// <inheritdoc />
         public String Region
         {
             get
@@ -202,8 +166,6 @@ namespace log4net.Appender
                 insightAsync.setRegion(value);
             }
         }
-
-        #endregion
 
         protected override void Append(LoggingEvent loggingEvent)
         {
@@ -225,6 +187,11 @@ namespace log4net.Appender
             {
                 return true;
             }
+        }
+
+        public override bool Flush(int millisecondsTimeout)
+        {
+            return insightAsync.FlushQueue(TimeSpan.FromMilliseconds(millisecondsTimeout));
         }
 
         protected override void OnClose()
