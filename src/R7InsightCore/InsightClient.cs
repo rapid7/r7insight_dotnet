@@ -22,7 +22,6 @@ namespace InsightCore.Net
         // defined server on defined port.
         public InsightClient(bool useSsl, bool useDataHub, String serverAddr, int port, String region)
         {
-
             // Override port number and server address to send logs to DataHub instance.
             if (useDataHub)
             {
@@ -39,7 +38,7 @@ namespace InsightCore.Net
                 else
                     TcpPort = LeSecurePort;
 
-                ServerAddr = String.Format(LeDataUrl, region); // By default m_ServerAddr points to api.logentries.com if useDataHub is not set to true.
+                ServerAddr = String.Format(LeDataUrl, region);
             }
         }
 
