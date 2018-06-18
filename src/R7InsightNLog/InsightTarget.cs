@@ -28,7 +28,7 @@ namespace NLog.Targets
                 bool success = base.LoadCredentials();
                 if (!success)
                 {
-                    InternalLogger.Warn("Failed to load credentials for LogEntries (GET), please check LOGENTRIES_TOKEN configuration");
+                    InternalLogger.Warn("Failed to load credentials");
                 }
                 return success;
             }

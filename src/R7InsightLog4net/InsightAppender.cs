@@ -24,7 +24,7 @@ namespace log4net.Appender
                 bool success = base.LoadCredentials();
                 if (!success)
                 {
-                    log4net.Util.LogLog.Warn(GetType(), "Failed to load credentials for LogEntries (GET), please check LOGENTRIES_TOKEN configuration");
+                    log4net.Util.LogLog.Warn(GetType(), "Failed to load credentials");
                 }
                 return success;
             }
