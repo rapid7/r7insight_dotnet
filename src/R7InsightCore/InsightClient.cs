@@ -8,18 +8,17 @@ namespace InsightCore.Net
 {
     class InsightClient
     {
-        // Logentries API server address. 
+        // Rapid7 Insight API server address. 
         protected const String LeDataUrl = "{0}.data.logs.insight.rapid7.com";
 
-        // Port number for logging on Logentries DATA server.
+        // Port number for logging on Rapid7 Insight DATA server. 
         protected const int LeUnsecurePort = 80;
 
-        // Port number for SSL logging on Logentries DATA server. 
+        // Port number for SSL logging on Rapid7 Insight DATA server. 
         protected const int LeSecurePort = 443;
 
-        // Creates LeClient instance. If do not define useServerUrl and/or useOverrideProt during call
-        // LeClient will be configured to work with api.logentries.com server; otherwise - with
-        // defined server on defined port.
+        // Creates InsightClient instance. If do not define useServerUrl and/or useOverrideProt during call
+        // will be configured to work with the defined server on defined port.
         public InsightClient(bool useSsl, bool useDataHub, String serverAddr, int port, String region)
         {
             // Override port number and server address to send logs to DataHub instance.
