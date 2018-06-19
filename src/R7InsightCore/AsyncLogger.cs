@@ -33,26 +33,18 @@ namespace InsightCore.Net
         protected const int MaxDelay = 10000;
 
         // Appender signature - used for debugging messages. 
-        protected const String LeSignature = "LE: ";
+        protected const String LeSignature = "R7Insight: ";
 
-        // Legacy Logentries configuration names. 
-        protected const String LegacyConfigTokenName = "LOGENTRIES_TOKEN";
-        protected const String LegacyConfigAccountKeyName = "LOGENTRIES_ACCOUNT_KEY";
-        protected const String LegacyConfigLocationName = "LOGENTRIES_LOCATION";
-
-        // New Logentries configuration names.
-        protected const String ConfigTokenName = "Logentries.Token";
-        protected const String ConfigAccountKeyName = "Logentries.AccountKey";
-        protected const String ConfigLocationName = "Logentries.Location";
+        // Rapid7 Insight configuration keys.
+        protected const String ConfigTokenName = "Insight.Token";
+        protected const String ConfigAccountKeyName = "Insight.AccountKey";
+        protected const String ConfigLocationName = "Insight.Location";
 
         // Error message displayed when invalid token is detected. 
-        protected const String InvalidTokenMessage = "\n\nIt appears your LOGENTRIES_TOKEN value is invalid or missing.\n\n";
-
-        // Error message displayed when invalid account_key or location parameters are detected. 
-        protected const String InvalidHttpPutCredentialsMessage = "\n\nIt appears your LOGENTRIES_ACCOUNT_KEY or LOGENTRIES_LOCATION values are invalid or missing.\n\n";
+        protected const String InvalidTokenMessage = "\n\nIt appears your log token value is invalid or missing.\n\n";
 
         // Error message deisplayed when queue overflow occurs. 
-        protected const String QueueOverflowMessage = "\n\nLogentries buffer queue overflow. Message dropped.\n\n";
+        protected const String QueueOverflowMessage = "\n\nInsight logger buffer queue overflow. Message dropped.\n\n";
 
         // Error message displayed when region is not provided.
         protected const String NoRegionMessage = "\n\nNo region is configured, please make sure one is configured; e.g: 'eu', 'us'.\n\n";
@@ -125,7 +117,7 @@ namespace InsightCore.Net
         private bool m_UseSsl = false;
 
         // Properties for defining location of DataHub instance if one is used.
-        private bool m_UseDataHub = false; // By default Logentries service is used instead of DataHub instance.
+        private bool m_UseDataHub = false; // By default R7Insight service is used instead of DataHub instance.
         private String m_DataHubAddr = "";
         private int m_DataHubPort = 0;
 
@@ -387,7 +379,7 @@ namespace InsightCore.Net
             }
             catch (Exception ex)
             {
-                WriteDebugMessages("Logentries asynchronous socket client was interrupted: ", ex);
+                WriteDebugMessages("R7Insight asynchronous socket client was interrupted.", ex);
             }
         }
 
@@ -428,7 +420,7 @@ namespace InsightCore.Net
                 }
                 catch (Exception ex)
                 {
-                    WriteDebugMessages(string.Format("Unable to connect to Logentries API at {0}:{1}", InsightClient != null ? InsightClient.ServerAddr : "null", InsightClient != null ? InsightClient.TcpPort : 0), ex);
+                    WriteDebugMessages(string.Format("Unable to connect to Rapid7 Insight API at {0}:{1}", InsightClient != null ? InsightClient.ServerAddr : "null", InsightClient != null ? InsightClient.TcpPort : 0), ex);
                 }
 
                 rootDelay *= 2;
@@ -474,7 +466,7 @@ namespace InsightCore.Net
                 return settingValue;
             }
 
-            WriteDebugMessages(String.Format("Unable to find Logentries Configuration Setting for {0}.", name));
+            WriteDebugMessages(String.Format("Unable to find Rapid7 Insighy Configuration Setting for {0}.", name));
             return null;
         }
 
@@ -482,8 +474,8 @@ namespace InsightCore.Net
          * Use CloudConfigurationManager with .NET4.0 and fallback to System.Configuration for previous frameworks.
          * 
          *       
-         *       One issue is that there are two appsetting keys for each setting - the "legacy" key, such as "LOGENTRIES_TOKEN"
-         *       and the "non-legacy" key, such as "Logentries.Token".  Again, I'm not sure of the reasons behind this, so the code below checks
+         *       One issue is that there are two appsetting keys for each setting such as 
+         *       the "non-legacy" key, such as "Insight.Token".  Again, I'm not sure of the reasons behind this, so the code below checks
          *       both the legacy and non-legacy keys, defaulting to the legacy keys if they are found.
          *       
          *       It probably should be investigated whether the fallback to ConfigurationManager is needed at all, as CloudConfigurationManager 
@@ -499,7 +491,7 @@ namespace InsightCore.Net
             if (GetIsValidGuid(m_Token))
                 return true;
 
-            var configToken = retrieveSetting(LegacyConfigTokenName) ?? retrieveSetting(ConfigTokenName);
+            var configToken = retrieveSetting(ConfigTokenName);
 
             if (!String.IsNullOrEmpty(configToken) && GetIsValidGuid(configToken))
             {
@@ -639,8 +631,8 @@ namespace InsightCore.Net
                 // If in DataHub mode credentials are ignored.
                 if (credentialsLoaded || m_UseDataHub)
                 {
-                    WriteDebugMessages("Starting Logentries asynchronous socket client.");
-                    WorkerThread.Name = "Logentries Log Appender";
+                    WriteDebugMessages("Starting Rapid7 Insight asynchronous socket client.");
+                    WorkerThread.Name = "Rapid7 Insight Log Appender";
                     WorkerThread.IsBackground = true;
                     WorkerThread.Start();
                     IsRunning = true;
