@@ -51,7 +51,7 @@ namespace NLog.Targets
         /// <inheritdoc />
         public bool IsUsingDataHub
         {
-            get { return insightAsync.getIsUsingDataHab(); }
+            get { return insightAsync.getIsUsingDataHub(); }
             set { insightAsync.setIsUsingDataHub(value); }
         }
 
