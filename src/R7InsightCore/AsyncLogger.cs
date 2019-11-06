@@ -652,7 +652,7 @@ namespace InsightCore.Net
                     Queue.TryAdd(trimmedEvent);
                 }
 
-                AddLineToQueue(trimmedEvent.Substring(LOG_LENGTH_LIMIT, trimmedEvent.Length), limit - 1);
+                AddLineToQueue(trimmedEvent.Substring(LOG_LENGTH_LIMIT, trimmedEvent.Length - LOG_LENGTH_LIMIT), limit - 1);
             }
             else
             {
