@@ -31,8 +31,3 @@ Visit [NLog docs](https://insightops.help.rapid7.com/docs/nlog)
 ## Log4Net
 
 Visit [Log4Net](https://insightops.help.rapid7.com/docs/log4net)
-
-Contact Support
-===============
-
-Please email our support team at support@rapid7.com if you need any help.
