@@ -14,7 +14,7 @@ These steps are outlined in further detail below.
 
 ## Creating Your Insight Account
 
-You can register your account on InsightOps by browning to [https://www.rapid7.com/products/insightops/try/](https://www.rapid7.com/products/insightops/try/) and simply clicking `Start A Free Trial`.
+You can register your account on InsightOps by browsing to [https://www.rapid7.com/products/insightops/try/](https://www.rapid7.com/products/insightops/try/) and simply clicking `Start A Free Trial`.
 
 ## Creating the Host and Log
 
