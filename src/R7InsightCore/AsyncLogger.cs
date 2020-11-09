@@ -645,24 +645,24 @@ namespace InsightCore.Net
 
             if (trimmedEvent.Length > LOG_LENGTH_LIMIT)
             {
-                if (!Queue.TryAdd(trimmedEvent.Substring(0, LOG_LENGTH_LIMIT)))
-                {
-                    WriteDebugMessages(QueueOverflowMessage);
-                    Queue.Take();
-                    Queue.TryAdd(trimmedEvent);
-                }
+                AddChunkToQueue(trimmedEvent.Substring(0, LOG_LENGTH_LIMIT));
 
-                AddLineToQueue(trimmedEvent.Substring(LOG_LENGTH_LIMIT, trimmedEvent.Length), limit - 1);
+                AddLineToQueue(trimmedEvent.Substring(LOG_LENGTH_LIMIT), limit - 1);
             }
             else
             {
-                // Try to append data to queue.
-                if (!Queue.TryAdd(trimmedEvent))
-                {
-                    WriteDebugMessages(QueueOverflowMessage);
-                    Queue.Take();
-                    Queue.TryAdd(trimmedEvent);
-                }
+                AddChunkToQueue(trimmedEvent);
+            }
+        }
+
+        private void AddChunkToQueue(string chunkedEvent)
+        {
+            // Try to append data to queue.
+            if (!Queue.TryAdd(chunkedEvent))
+            {
+                WriteDebugMessages(QueueOverflowMessage);
+                Queue.Take();
+                Queue.TryAdd(chunkedEvent);
             }
         }
     }
