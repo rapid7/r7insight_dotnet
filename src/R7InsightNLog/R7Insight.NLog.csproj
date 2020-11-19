@@ -4,16 +4,21 @@
     <TargetFrameworks>net35;net40;netstandard1.3;netstandard2.0</TargetFrameworks>
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.0</NetStandardImplicitPackageVersion>
 
-    <PackageVersion>2.9.0</PackageVersion>
+    <PackageVersion>2.9.1</PackageVersion>
     <Authors>Rapid7</Authors>
     <Company>Rapid7</Company>
     <Description>Rapid7 Insight logging support nlog library</Description>
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <Copyright>Copyright © 2017</Copyright>
-    <PackageTags>nlog;Insight;logging</PackageTags>
-    <PackageLicenseUrl>https://github.com/rapid7/r7insight_dotnet/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <Copyright>Copyright © 2020</Copyright>
+    <PackageTags>nlog;Insight;logging;logger;rapid7</PackageTags>
+    <PackageLicense>https://github.com/rapid7/r7insight_dotnet/blob/master/LICENSE.txt</PackageLicense>
     <PackageProjectUrl>https://github.com/rapid7/r7insight_dotnet/</PackageProjectUrl>
 
+    <NeutralLanguage>en</NeutralLanguage>
+    <Owners>Rapid7</Owners>
+    <Summary>Rapid7 Insight logging support nlog library</Summary>
+    <Title>R7Insight.NLog</Title>
+    <PackageReleaseNotes>Fix OutOfRangeException when input string is bigger then LOG_LENGTH_LIMIT</PackageReleaseNotes>
+    <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
