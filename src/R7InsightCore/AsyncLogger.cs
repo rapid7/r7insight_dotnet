@@ -466,7 +466,7 @@ namespace InsightCore.Net
                 return settingValue;
             }
 
-            WriteDebugMessages(String.Format("Unable to find Rapid7 Insighy Configuration Setting for {0}.", name));
+            WriteDebugMessages(String.Format("Unable to find Rapid7 Insight Configuration Setting for {0}.", name));
             return null;
         }
 
