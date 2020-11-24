@@ -4,11 +4,11 @@
     <TargetFrameworks>net35;net40;netstandard1.3;netstandard2.0</TargetFrameworks>
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.0</NetStandardImplicitPackageVersion>
 
-    <PackageVersion>2.9.1</PackageVersion>
+    <PackageVersion>2.9.2</PackageVersion>
     <Company>Rapid7</Company>
     <Authors>Rapid7</Authors>
     <Description>Rapid7 Insight logging core library for dotnet support. </Description>
-    <PackageReleaseNotes>Fix OutOfRangeException when input string is bigger then LOG_LENGTH_LIMIT</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix typo</PackageReleaseNotes>
     <Copyright>Copyright © 2020</Copyright>
     <PackageTags>Insight;logging;logger;insightops;rapid7</PackageTags>
     <PackageLicense>https://github.com/rapid7/r7insight_dotnet/blob/master/LICENSE.txt</PackageLicense>

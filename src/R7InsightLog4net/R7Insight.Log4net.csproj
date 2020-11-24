@@ -4,7 +4,7 @@
     <TargetFrameworks>net35;net40;netstandard1.3;netstandard2.0</TargetFrameworks>
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.0</NetStandardImplicitPackageVersion>
 
-    <PackageVersion>2.9.1</PackageVersion>
+    <PackageVersion>2.9.2</PackageVersion>
     <Authors>Rapid7</Authors>
     <Company>Rapid7</Company>
     <Description>Rapid7 Insight logging support log4net library</Description>
@@ -17,7 +17,7 @@
     <Owners>Rapid7</Owners>
     <Title>R7Insight.Log4net</Title>
     <Summary>Rapid7 Insight logging support log4net library</Summary>
-    <PackageReleaseNotes>Fix OutOfRangeException when input string is bigger then LOG_LENGTH_LIMIT</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix typo</PackageReleaseNotes>
     <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
 
