@@ -6,4 +6,4 @@
 
 - Implement desired functionality
 - Bump the package versions according to [SemVer](https://semver.org/)
-- Update the package release notes
+- Update the package release notes in the Nuget Package Metadata section in Project Options
