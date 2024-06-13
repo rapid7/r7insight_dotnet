@@ -1,14 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net35;net40;netstandard1.3;netstandard2.0</TargetFrameworks>
-    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.0</NetStandardImplicitPackageVersion>
-
-    <PackageVersion>2.9.2</PackageVersion>
+    <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
+    <PackageVersion>3.0.0</PackageVersion>
     <Company>Rapid7</Company>
     <Authors>Rapid7</Authors>
-    <Description>Rapid7 Insight logging core library for dotnet support. </Description>
-    <PackageReleaseNotes>Fix typo</PackageReleaseNotes>
+    <Description>Rapid7 Insight logging core library for dotnet support.</Description>
+    <PackageReleaseNotes>Bump dependencies for vulnerabilities</PackageReleaseNotes>
     <Copyright>Copyright © 2020</Copyright>
     <PackageTags>Insight;logging;logger;insightops;rapid7</PackageTags>
     <PackageLicense>https://github.com/rapid7/r7insight_dotnet/blob/master/LICENSE.txt</PackageLicense>
@@ -22,23 +20,9 @@
     <PackageId>R7Insight.Core</PackageId>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <PackageReference Include="TaskParallelLibrary" Version="1.0.2856.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <PackageReference Include="Microsoft.WindowsAzure.ConfigurationManager" Version="3.1.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
-    <PackageReference Include="System.Diagnostics.TraceSource" Version="4.0.0" />
-    <PackageReference Include="System.Net.Security" Version="4.0.1" />
-    <PackageReference Include="System.Threading" Version="4.0.11" />
-    <PackageReference Include="System.Threading.Thread" Version="4.0.0" />
+  <ItemGroup>
+    <PackageReference Include="System.Net.Security" Version="4.3.2" />
+    <PackageReference Include="log4net" Version="2.0.17" />
   </ItemGroup>
 
 </Project>
