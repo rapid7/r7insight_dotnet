@@ -262,15 +262,7 @@ namespace InsightCore.Net
                             WriteDebugMessages("HostName parameter is not defined - trying to get it from System.Environment.MachineName");
 
                             string hostName;
-#if NETSTANDARD1_3
-                            hostName = System.Environment.GetEnvironmentVariable("COMPUTERNAME") ?? string.Empty;
-                            if (string.IsNullOrEmpty(hostName))
-                                hostName = System.Environment.GetEnvironmentVariable("HOSTNAME") ?? string.Empty;
-                            if (string.IsNullOrEmpty(hostName))
-                                throw new ArgumentNullException("HOSTNAME");
-#else
                             hostName = System.Environment.MachineName;
-#endif
                             m_HostName = "HostName=" + hostName + " ";
                         }
                         catch (Exception ex)
@@ -517,12 +509,8 @@ namespace InsightCore.Net
 
             try
             {
-#if NET35
-                newGuid = new Guid(guidString);
-#else
                 if (!System.Guid.TryParse(guidString, out newGuid))
                     return false;
-#endif
                 return newGuid != System.Guid.Empty;
             }
             catch
